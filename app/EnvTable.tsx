@@ -153,14 +153,16 @@ export function EnvTable({ rows, onChange, revealAll }: EnvTableProps) {
                     <input
                       value={row.value}
                       onChange={(event) => update(row.id, { value: event.target.value })}
-                      placeholder="value"
+                      placeholder="empty"
                       aria-label={`Value of ${row.name || "new setting"}`}
                       spellCheck={false}
                       autoComplete="off"
                       data-1p-ignore="true"
                       data-lpignore="true"
                       style={shown ? undefined : ({ WebkitTextSecurity: "disc" } as React.CSSProperties)}
-                      className={cn(fieldClass, "flex-1")}
+                      // An empty value shows a dimmed, italic "empty", so it is not
+                      // mistaken for a value.
+                      className={cn(fieldClass, "flex-1 placeholder:italic placeholder:opacity-60")}
                     />
                     <div className="flex shrink-0 items-center opacity-60 transition-opacity group-focus-within:opacity-100 group-hover:opacity-100">
                       <RowButton
@@ -180,7 +182,7 @@ export function EnvTable({ rows, onChange, revealAll }: EnvTableProps) {
                         }}
                       />
                       <RowButton
-                        icon="RefreshCw"
+                        icon="sops/dice"
                         label="Replace with a new random secret"
                         onClick={() => {
                           update(row.id, { value: randomSecret() });

@@ -90,7 +90,7 @@ export function FileList({ threadId }: { threadId: string }) {
           disabled={loading}
           aria-label="Search again"
         >
-          <Icon name="RefreshCw" className={cn("size-3.5", loading && "animate-spin")} />
+          <Icon name="RotateCcw" className={cn("size-3.5", loading && "animate-spin")} />
         </Button>
       </div>
       {total > 8 ? (
@@ -129,13 +129,19 @@ export function FileList({ threadId }: { threadId: string }) {
   );
 }
 
-function SectionHeader({ title, detail }: { title: string; detail: string | null }) {
+/**
+ * A section's label and its folder. Only the folder's own name is shown
+ * (the full path is in the tooltip): enough to tell folders apart, and a
+ * screenshot of the list does not carry the user's home path.
+ */
+function SectionHeader({ title, folder }: { title: string; folder: string | null }) {
+  const name = folder === null ? null : (folder.split("/").filter((part) => part !== "").at(-1) ?? folder);
   return (
     <div className="flex items-baseline gap-2 px-2 pb-1">
       <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{title}</span>
-      {detail !== null ? (
-        <span className="truncate font-mono text-xs text-muted-foreground" title={detail}>
-          {detail}
+      {name !== null ? (
+        <span className="truncate font-mono text-xs text-muted-foreground" title={folder ?? undefined}>
+          {name}
         </span>
       ) : null}
     </div>
@@ -163,7 +169,7 @@ function FolderSection({
     <section>
       <SectionHeader
         title={folder.origin === "thread" ? "This thread's folder" : "Folder"}
-        detail={folder.root === null ? null : formatHomePathForDisplay(folder.root)}
+        folder={folder.root === null ? null : formatHomePathForDisplay(folder.root)}
       />
       {folder.message !== null ? (
         <Empty>{folder.message}</Empty>
@@ -233,7 +239,7 @@ function FileRow({
           <span className="block truncate text-xs text-muted-foreground">{secondary}</span>
         </span>
         <span className="flex shrink-0 items-center gap-1 text-xs text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
-          <Icon name="Pencil" className="size-3" />
+          <Icon name="sops/pencil" className="size-3" />
           Edit
         </span>
       </button>

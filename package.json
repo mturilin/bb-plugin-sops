@@ -1,6 +1,6 @@
 {
   "name": "bb-plugin-sops",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "BB plugin: edit SOPS-encrypted secrets beside your threads.",
   "license": "GPL-3.0-only",
   "author": "Mikhail Turilin",
@@ -18,7 +18,11 @@
     "name": "SOPS",
     "description": "Edit SOPS-encrypted secrets beside your threads: see the repo's encrypted files, edit them in a table or a text editor, and save them encrypted again.",
     "branding": {
-      "icon": "Lock"
+      "icon": "Lock",
+      "experimental_icons": {
+        "dice": "./icons/dice.svg",
+        "pencil": "./icons/pencil.svg"
+      }
     },
     "server": "./server.ts",
     "app": "./app.tsx",

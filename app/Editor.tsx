@@ -94,7 +94,7 @@ export function Editor({ threadId, fileRef }: EditorProps) {
   if (load.status === "error") {
     return (
       <Centered>
-        <Icon name="TriangleAlert" className="size-5 text-destructive" />
+        <Icon name="AlertTriangle" className="size-5 text-destructive" />
         <p role="alert" className="max-w-md whitespace-pre-wrap text-center text-sm text-destructive">
           {load.message}
         </p>
@@ -339,7 +339,7 @@ function LoadedEditor({
 
       {/* Banners */}
       {conflict ? (
-        <Banner tone="destructive" icon="TriangleAlert">
+        <Banner tone="destructive" icon="AlertTriangle">
           <span className="flex-1">
             This file changed on disk since you opened it, so it was not saved. Your edits are
             still here.

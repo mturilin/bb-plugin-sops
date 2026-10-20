@@ -1,0 +1,5 @@
+# Tools the end-to-end tests drive (server/sops.test.ts). `npm test` skips
+# those tests when they are missing.
+[tools]
+sops = "3.13.3"
+age = "1.3.2"
